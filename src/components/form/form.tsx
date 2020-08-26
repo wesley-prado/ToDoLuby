@@ -1,9 +1,15 @@
-import React from 'react'
-import {Formik} from 'formik'
-import {Container} from '../../shared/styles'
+import React, { useState } from 'react'
+import { Formik } from 'formik'
 import * as Yup from 'yup'
-
-const Form: React.FC = ()=>{
+import { Input, Button } from '../../shared/styles'
+import { FormContainer } from './style'
+// Arrumar o save do localStorage.
+type ToDo = {
+  todo: string,
+  description: string
+}
+const Form: React.FC = () => {
+  const [todo, setTodo] = useState<ToDo[]>([])
   const todoSchema = Yup.object().shape({
     todo: Yup
       .string()
@@ -15,40 +21,42 @@ const Form: React.FC = ()=>{
   })
 
   return (
-    <Container>
-        <Formik
-          initialValues={{todo:'', description:''}}
-          validationSchema={todoSchema}
-          onSubmit={(values, {setSubmitting})=>{
-            const name = localStorage.getItem('username' || '')
-            localStorage.setItem(`todo-list-username#${name}`, JSON.stringify(values))
-            setSubmitting(false)
-          }}
-          >
-            {({
-              values,
-              errors,
-              handleChange,
-              handleSubmit,
-              isSubmitting
-            })=>(
-              <form onSubmit={handleSubmit}>
-                {errors.todo || errors.description}
-                <input
-                  type="text"
-                  name="todo"
-                  onChange={handleChange}
-                  value={values.todo}/>
-                  <input
-                    type="text"
-                    name="todo"
-                    onChange={handleChange}
-                    value={values.description}/>
-                  <button type="submit" disabled={isSubmitting}>Let's go!</button>
-              </form>
-            )}
-          </Formik>
-      </Container>
+    <Formik
+      initialValues={{ todo: '', description: '' }}
+      validationSchema={todoSchema}
+      onSubmit={(values, { setSubmitting }) => {
+        const name = localStorage.getItem('username') || 'Human Being'
+        setTodo([values])
+        localStorage.setItem(`todo-list-username#${name}`, JSON.stringify(todo))
+        setSubmitting(false)
+      }}
+    >
+      {({
+        values,
+        errors,
+        handleChange,
+        handleSubmit,
+        isSubmitting
+      }) => (
+        <form onSubmit={handleSubmit}>
+          <FormContainer>
+            {errors.todo || errors.description}
+            <Input
+              type="text"
+              name="todo"
+              onChange={handleChange}
+              value={values.todo}/>
+            <Input
+              type="text"
+              name="description"
+              onChange={handleChange}
+              value={values.description}/>
+            <Button type="submit" disabled={isSubmitting}>Save</Button>
+          </FormContainer>
+        </form>
+      )}
+    </Formik>
+
   )
 }
 

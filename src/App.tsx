@@ -1,18 +1,26 @@
 import {
   Route,
   BrowserRouter as Router,
+  Switch,
+  Redirect
 } from 'react-router-dom'
-import React from 'react';
-import Home from './pages/home/Home'
+import React from 'react'
 import GlobalStyles from './shared/styles/global-styles'
+// Pages
+import { Home, NotFound, ToDo } from './pages'
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
-      <GlobalStyles/>
-     <Route exact path="/" component={Home}/>
-   </Router>
-  );
+      <GlobalStyles />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/todo" component={ToDo} />
+        <Route path="/404" component={NotFound} />
+        <Redirect to="/404" />
+      </Switch>
+    </Router>
+  )
 }
 
-export default App;
+export default App

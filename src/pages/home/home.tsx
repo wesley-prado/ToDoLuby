@@ -1,26 +1,27 @@
-import React, {useState} from 'react'
-import {useHistory} from 'react-router-dom'
-import {HomeSubtitle, HomeTitle, HomeText, HomeInput, HomeContainer, HomeButton,HomeLogo } from './style'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { Input, Title, Button } from '../../shared/styles'
+import { HomeSubtitle, HomeContainer, HomeLogo, HomeText } from './style'
 
-
-const Home: React.FC = ()=>{
+const Home: React.FC = () => {
   const [username, setUsername] = useState('')
   const history = useHistory()
-  const handleSubmit = ()=>{
+  const handleSubmit = () => {
     localStorage.setItem('username', username)
-    return (
-      history.push('/todo')
-    )
+    return history.push('/todo')
   }
 
   return (
     <HomeContainer>
-      <HomeLogo/>
-      <HomeTitle>ToDoLuby</HomeTitle>
-      <HomeSubtitle>A simple To Do List to organize what you have to accomplish during the day.</HomeSubtitle>
+      <HomeLogo />
+      <Title>ToDoLuby</Title>
+      <HomeSubtitle>
+        A simple To Do List to organize what you have to accomplish during the
+        day.
+      </HomeSubtitle>
       <HomeText>Create a profile</HomeText>
-        <HomeInput type="text" onChange={(e)=>setUsername(e.target.value)}/>
-        <HomeButton onClick={handleSubmit}>Let's go!</HomeButton>
+      <Input type="text" onChange={(e) => setUsername(e.target.value)} />
+      <Button onClick={handleSubmit}>Let's go!</Button>
     </HomeContainer>
   )
 }
