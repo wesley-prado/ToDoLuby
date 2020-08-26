@@ -2,13 +2,14 @@ import {
   Route,
   BrowserRouter as Router,
 } from 'react-router-dom'
-
-import Home from './pages/home/home'
 import React from 'react';
+import Home from './pages/home/Home'
+import GlobalStyles from './shared/styles/global-styles'
 
 function App() {
   return (
-   <Router>
+    <Router>
+      <GlobalStyles/>
      <Route exact path="/" component={Home}/>
    </Router>
   );
