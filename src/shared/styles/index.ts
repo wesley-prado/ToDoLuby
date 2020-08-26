@@ -5,13 +5,11 @@ export const Title = styled.h1`
   font-size:2em;
   font-weight:bold;
   color: #333;
-  font-family: 'Rubik', sans-serif;
 `
 
 export const Subtitle = styled.h2`
   font-size:1.5em;
   color: #333;
-  font-family: 'Rubik', sans-serif;
 `
 export const Container = styled.div`
   display:flex;
@@ -25,7 +23,6 @@ export const Container = styled.div`
 `
 export const Text = styled.p`
   color: #333;
-  font-family: 'Rubik', sans-serif;
   font-size: 1.3em;
   letter-spacing:0.1em;
   margin-top:15px;
@@ -35,7 +32,7 @@ export const Input = styled.input`
   width: 35vw;
   height:40px;
   padding:3px;
-  margin-top:15px;
+  margin-bottom:15px;
   border-radius: 5px;
   border:2px solid rgba(0,0,0,0.2);
   outline:none;
@@ -52,8 +49,6 @@ export const Button = styled.button`
   height:40px;
   border-radius:5px;
   color: #333;
-  margin-top:30px;
-  font-family: 'Rubik', sans-serif;
   font-size: 1em;
   font-weight: bold;
   letter-spacing: 0.1em;

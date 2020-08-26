@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { Input, Button } from '../../shared/styles'
-import { FormContainer } from './style'
-// Arrumar o save do localStorage.
+import { FormContainer, FormText,FormInput, FormButton } from './style'
+
 type ToDo = {
   todo: string,
   description: string
 }
+
 const Form: React.FC = () => {
   const [todo, setTodo] = useState<ToDo[]>([])
   const todoSchema = Yup.object().shape({
@@ -20,14 +20,24 @@ const Form: React.FC = () => {
       .required()
   })
 
+  useEffect(()=>{
+    const username = localStorage.getItem('username') || ''
+    const doesItExists = JSON.parse(localStorage.getItem(`todo-list#${username}` )|| '[]')
+    if(todo.length === 0 && doesItExists.length !== 0){
+      setTodo(doesItExists)
+    }
+    localStorage.setItem(`todo-list#${username}`, JSON.stringify(todo))
+  },[todo])
+
   return (
     <Formik
       initialValues={{ todo: '', description: '' }}
       validationSchema={todoSchema}
       onSubmit={(values, { setSubmitting }) => {
-        const name = localStorage.getItem('username') || 'Human Being'
-        setTodo([values])
-        localStorage.setItem(`todo-list-username#${name}`, JSON.stringify(todo))
+        if(!todo){
+          setTodo([values])
+        }
+        setTodo([...todo, values])
         setSubmitting(false)
       }}
     >
@@ -40,18 +50,20 @@ const Form: React.FC = () => {
       }) => (
         <form onSubmit={handleSubmit}>
           <FormContainer>
-            {errors.todo || errors.description}
-            <Input
+            <label htmlFor="todo">To Do</label>
+            <FormInput
               type="text"
               name="todo"
               onChange={handleChange}
               value={values.todo}/>
-            <Input
+              <label htmlFor="description">Description</label>
+            <FormInput
               type="text"
               name="description"
               onChange={handleChange}
               value={values.description}/>
-            <Button type="submit" disabled={isSubmitting}>Save</Button>
+            <FormButton type="submit" disabled={isSubmitting}>Save</FormButton>
+            <FormText>{errors.todo || errors.description}</FormText>
           </FormContainer>
         </form>
       )}
