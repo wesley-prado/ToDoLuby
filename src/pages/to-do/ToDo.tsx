@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from '../../components/form/Form';
-import { ListContainer } from './style';
+import { ListContainer, ToDoTitle } from './style';
 import { Container, Subtitle } from '../../shared/styles';
 import List from '../../components/list/List';
 import { ToDoTypes } from '../../components/form/types';
@@ -8,16 +8,22 @@ import { getUsernameFromLocalStorage } from '../../utils/getInfoFromLocalStorage
 
 const ToDo: React.FC = () => {
   const [todoList, setTodoList] = useState<ToDoTypes[]>([]);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    setUsername(getUsernameFromLocalStorage());
+  }, [username]);
 
   function complete(i: number): boolean {
     const isDone = (todoList[i].done = !todoList[i].done);
-    const username = getUsernameFromLocalStorage();
+
     localStorage.setItem(`todo-list#${username}`, JSON.stringify(todoList));
     return isDone;
   }
 
   return (
     <Container>
+      <ToDoTitle>{username}</ToDoTitle>
       <Subtitle>Write your tasks</Subtitle>
       <Form todoList={todoList} setTodoList={setTodoList} />
       <ListContainer>

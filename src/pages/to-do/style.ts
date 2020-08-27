@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../shared/styles';
+import { Button, Title } from '../../shared/styles';
 
 export const ListContainer = styled.div`
   display: flex;
@@ -20,4 +20,9 @@ export const ListContainer = styled.div`
 export const SortButton = styled(Button)`
   min-width: 400px;
   margin-bottom: 15px;
+`;
+export const ToDoTitle = styled(Title)`
+  margin-bottom: 30px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid skyblue;
 `;
