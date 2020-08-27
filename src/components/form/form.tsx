@@ -68,13 +68,24 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
               type="text"
               name="todo"
               onChange={handleChange}
-              value={values.todo}/>
+              value={values.todo}
+              onKeyPress={(e)=>{
+                if(e.keyCode === 13){
+                  handleSubmit()
+                }
+              }}/>
               <label htmlFor="description">Description</label>
             <FormInput
               type="text"
               name="description"
               onChange={handleChange}
-              value={values.description}/>
+              value={values.description}
+              onKeyPress={(e)=>{
+                if(e.keyCode === 13){
+                  handleSubmit()
+                }
+              }}
+              />
             <FormButton type="submit" disabled={isSubmitting}>Save</FormButton>
             <ErrorContainer>
               <ErrorText>{ errors.todo || errors.description }</ErrorText>

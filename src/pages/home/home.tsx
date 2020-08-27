@@ -19,7 +19,11 @@ const Home: React.FC = ()=>{
         <Title>ToDoLuby</Title>
         <HomeSubtitle>A simple To Do List to organize the tasks you have to accomplish during the day.</HomeSubtitle>
         <HomeText>Create a profile</HomeText>
-        <Input type="text" onChange={handleChange} autoComplete="on"/>
+        <Input type="text" onChange={handleChange} onKeyDown={(e)=>{
+          if(e.keyCode === 13){
+            handleSubmit()
+          }
+        }}/>
         <Button onClick={handleSubmit}>Let's go!</Button>
     </HomeContainer>
   )
