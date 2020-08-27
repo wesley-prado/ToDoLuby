@@ -19,8 +19,9 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
   });
 
   useEffect(() => {
-    const username = JSON.parse(getUsernameFromLocalStorage());
+    const username = getUsernameFromLocalStorage();
     setUsername(username);
+    localStorage.setItem('username', username);
     const doesItExists = getDataFromLocalStorage(username);
     if (todoList.length === 0 && doesItExists.length !== 0) {
       setTodoList(doesItExists);

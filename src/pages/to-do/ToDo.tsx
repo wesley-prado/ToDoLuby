@@ -12,7 +12,9 @@ const ToDo: React.FC = () => {
 
   useEffect(() => {
     if (username.length === 0) {
-      setUsername(JSON.parse(getUsernameFromLocalStorage()));
+      const username = getUsernameFromLocalStorage();
+      console.log(typeof username);
+      setUsername(username);
     }
   }, [username]);
 
