@@ -1,16 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {ToDoTypes} from '../form/types'
+import {ListTitle, ListText, TodoContainer} from './style'
 
-type Props = {
-  todo: ToDoTypes
+type Props = ToDoTypes & {
+  complete: () => boolean
 }
 
-const List: React.FC<Props> = ({todo})=>{
+const List: React.FC<Props> = ({todo, description, done, complete})=>{
+  const [isDone, setIsDone] = useState(done)
+
   return(
-    <>
-      <h2>{todo.todo}</h2>
-      <p>{todo.description}</p>
-    </>
+    <TodoContainer>
+      <ListTitle onClick={()=>{
+        setIsDone(complete())
+      }}>{todo}</ListTitle>
+      <ListText>{description}</ListText>
+      {isDone && <p>done</p>}
+    </TodoContainer>
   )
 }
 

@@ -1,4 +1,5 @@
 export type ToDoTypes = {
   todo: string,
-  description: string
+  description: string,
+  done: boolean
 }

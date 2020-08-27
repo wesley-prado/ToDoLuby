@@ -16,7 +16,9 @@ export const Container = styled.div`
   flex-direction:column;
   align-items:center;
   width:95vw;
-  height:100vh;
+  padding: 40px;
+  min-height:100vh;
+  height:100%;
   margin:0 auto;
   background-color: #f9f9f9;
   border: 1px solid transparent;

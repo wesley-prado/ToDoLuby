@@ -6,12 +6,17 @@ export const FormContainer = styled.div`
   flex-direction: column;
   min-width: 400px;
 `
-export const FormText = styled(Text)`
-  text-align: center;
+export const ErrorText = styled(Text)`
+  text-align:center;
+  color: crimson;
+  font-weight:bold;
 `
 export const FormInput = styled(Input)`
   min-width:400px;
 `
 export const FormButton = styled(Button)`
   min-width:400px;
+`
+export const ErrorContainer = styled.div`
+  height:50px;
 `

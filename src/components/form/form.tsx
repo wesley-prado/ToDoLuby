@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { FormContainer, FormText,FormInput, FormButton } from './style'
+import { FormContainer, ErrorText,FormInput, FormButton, ErrorContainer } from './style'
 import {ToDoTypes} from './types'
 
 type Props = {
@@ -10,7 +10,6 @@ type Props = {
 }
 
 const Form: React.FC<Props> = ({todoList, setTodoList}) => {
-  // const [todo, setTodo] = useState<ToDoTypes[]>([])
   const [username, setUsername] = useState('')
   const todoSchema = Yup.object().shape({
     todo: Yup
@@ -19,7 +18,10 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
       .min(5),
     description: Yup
       .string()
-      .required()
+      .required(),
+    done: Yup
+      .bool()
+      .default(false)
   })
 
   useEffect(()=>{
@@ -34,8 +36,10 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
 
   return (
     <Formik
-      initialValues={{ todo: '', description: '' }}
+      initialValues={{ todo: '', description: '', done: false }}
       validationSchema={todoSchema}
+      validateOnBlur={false}
+      validateOnChange={false}
       onSubmit={(values, { setSubmitting }) => {
         if(!todoList){
           setTodoList([values])
@@ -50,7 +54,7 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
         errors,
         handleChange,
         handleSubmit,
-        isSubmitting
+        isSubmitting,
       }) => (
         <form onSubmit={handleSubmit}>
           <FormContainer>
@@ -67,7 +71,9 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
               onChange={handleChange}
               value={values.description}/>
             <FormButton type="submit" disabled={isSubmitting}>Save</FormButton>
-            <FormText>{errors.todo || errors.description}</FormText>
+            <ErrorContainer>
+              <ErrorText>{ errors.todo || errors.description}</ErrorText>
+            </ErrorContainer>
           </FormContainer>
         </form>
       )}
