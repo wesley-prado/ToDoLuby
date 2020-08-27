@@ -13,7 +13,7 @@ export const HomeContainer = styled(Container)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: fit-content;
+  height: 70vh;
   padding-top: 200px;
   padding-bottom: 200px;
   border-radius: 5px;

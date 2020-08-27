@@ -1,7 +1,15 @@
-import React from 'react'
-
+import React from 'react';
+import { Title } from '../../shared/styles';
+import { NotFoundImg, MsgContainer, NotFoundContainer } from './style';
 const NotFound: React.FC = () => {
-  return <h1>Page not found!</h1>
-}
+  return (
+    <NotFoundContainer>
+      <MsgContainer>
+        <Title>Page not found!</Title>
+        <NotFoundImg />
+      </MsgContainer>
+    </NotFoundContainer>
+  );
+};
 
-export default NotFound
+export default NotFound;
