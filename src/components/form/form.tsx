@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { FormContainer, FormText,FormInput, FormButton } from './style'
+import {ToDoTypes} from './types'
 
-type ToDo = {
-  todo: string,
-  description: string
+type Props = {
+  todoList: ToDoTypes[],
+  setTodoList: React.Dispatch<React.SetStateAction<ToDoTypes[]>>
 }
 
-const Form: React.FC = () => {
-  const [todo, setTodo] = useState<ToDo[]>([])
+const Form: React.FC<Props> = ({todoList, setTodoList}) => {
+  // const [todo, setTodo] = useState<ToDoTypes[]>([])
+  const [username, setUsername] = useState('')
   const todoSchema = Yup.object().shape({
     todo: Yup
       .string()
@@ -21,23 +23,25 @@ const Form: React.FC = () => {
   })
 
   useEffect(()=>{
-    const username = localStorage.getItem('username') || ''
+    const username = localStorage.getItem('username') || 'Human Being'
+    setUsername(username)
     const doesItExists = JSON.parse(localStorage.getItem(`todo-list#${username}` )|| '[]')
-    if(todo.length === 0 && doesItExists.length !== 0){
-      setTodo(doesItExists)
+    if(todoList.length === 0 && doesItExists.length !== 0){
+      setTodoList(doesItExists)
     }
-    localStorage.setItem(`todo-list#${username}`, JSON.stringify(todo))
-  },[todo])
+    localStorage.setItem(`todo-list#${username}`, JSON.stringify(todoList))
+  },[setTodoList, todoList, username])
 
   return (
     <Formik
       initialValues={{ todo: '', description: '' }}
       validationSchema={todoSchema}
       onSubmit={(values, { setSubmitting }) => {
-        if(!todo){
-          setTodo([values])
+        if(!todoList){
+          setTodoList([values])
         }
-        setTodo([...todo, values])
+        const newArr = [...todoList, values]
+        setTodoList(newArr)
         setSubmitting(false)
       }}
     >

@@ -3,7 +3,11 @@ import {useHistory} from 'react-router-dom'
 import {Input, Button, Title} from '../../shared/styles'
 import {HomeContainer,HomeLogo,HomeSubtitle,HomeText} from './style'
 
-const Home: React.FC = ()=>{
+type Props = {
+  dispatch: any
+}
+
+const Home: React.FC<Props> = ({dispatch})=>{
   const [username, setUsername] = useState('')
   const history = useHistory()
   function handleChange(e:React.ChangeEvent<HTMLInputElement>): void{
@@ -19,7 +23,7 @@ const Home: React.FC = ()=>{
       <Title>ToDoLuby</Title>
       <HomeSubtitle>A simple To Do List to organize the tasks you have to accomplish during the day.</HomeSubtitle>
       <HomeText>Create a profile</HomeText>
-      <Input type="text" onChange={handleChange}/>
+      <Input type="text" onChange={handleChange} autoComplete="on"/>
       <Button onClick={handleSubmit}>Let's go!</Button>
     </HomeContainer>
   )
