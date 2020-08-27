@@ -6,8 +6,7 @@ import {ToDoTypes} from '../../components/form/types'
 
 const ToDo: React.FC = () => {
   const [todoList, setTodoList] = useState<ToDoTypes[]>([])
-
-  console.log(todoList)
+  
   return (
     <Container>
       <Text>Write your tasks</Text>

@@ -3,11 +3,7 @@ import {useHistory} from 'react-router-dom'
 import {Input, Button, Title} from '../../shared/styles'
 import {HomeContainer,HomeLogo,HomeSubtitle,HomeText} from './style'
 
-type Props = {
-  dispatch: any
-}
-
-const Home: React.FC<Props> = ({dispatch})=>{
+const Home: React.FC = ()=>{
   const [username, setUsername] = useState('')
   const history = useHistory()
   function handleChange(e:React.ChangeEvent<HTMLInputElement>): void{
