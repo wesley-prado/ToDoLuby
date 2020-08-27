@@ -12,11 +12,12 @@ export const ListTitle = styled.h2`
 `
 export const ListText = styled.h3`
   border-bottom:1px solid #333;
+  text-align:center;
 `
 export const TodoContainer = styled.div`
   display:flex;
   flex-direction:column;
   align-items:center;
   width:100%;
-  height:100px;
+  height:100%;
 `
