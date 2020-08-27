@@ -5,6 +5,7 @@ import { Container, Subtitle } from '../../shared/styles'
 import List from '../../components/list/List'
 import {ToDoTypes} from '../../components/form/types'
 import { getUsernameFromLocalStorage } from '../../utils/getInfoFromLocalStorage'
+import {handleSortCompleted,handleSortIncomplete} from '../../utils/sort'
 
 const ToDo: React.FC = () => {
   const [todoList, setTodoList] = useState<ToDoTypes[]>([])
@@ -17,39 +18,12 @@ const ToDo: React.FC = () => {
     return isDone
   }
 
-  function handleSortCompleted(){
-    let tempArr = todoList
-    tempArr.sort((a, b)=>{
-      if(a.done > b.done){
-        return -1
-      }
-      if(a.done < b.done){
-        return 1
-      }
-      return 0
-    })
-    setToCompleted(true)
-  }
-
-  function handleSortIncomplete(){
-    let tempArr = todoList
-    tempArr.sort((a, b)=>{
-      if(a.done < b.done){
-        return -1
-      }
-      if(a.done > b.done){
-        return 1
-      }
-        return 0
-    })
-    setToCompleted(false)
-  }
   return (
     <Container>
       <Subtitle>Write your tasks</Subtitle>
       <Form todoList={todoList} setTodoList={setTodoList}/>
       <SortButton onClick={()=>{
-        toCompleted ? handleSortIncomplete() : handleSortCompleted()
+        toCompleted ? handleSortIncomplete(todoList,setToCompleted) : handleSortCompleted(todoList,setToCompleted)
       }}>Sort by {toCompleted ? "Incomplete" : "Completed"}</SortButton>
       <ListContainer>
       {todoList.length !== 0 && todoList.map(({todo, description, done}, i)=>{
