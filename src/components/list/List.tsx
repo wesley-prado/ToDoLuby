@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { ToDoTypes } from '../form/types';
 import { ListTitle, ListText, TodoContainer } from './style';
 
@@ -29,4 +29,4 @@ const List: React.FC<Props> = ({ todo, description, done, complete }) => {
   );
 };
 
-export default List;
+export default memo(List);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { getUsernameFromLocalStorage, getDataFromLocalStorage } from '../../utils/getInfoFromLocalStorage';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -19,8 +19,9 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
   });
 
   useEffect(() => {
-    const username = JSON.parse(getUsernameFromLocalStorage());
+    const username = getUsernameFromLocalStorage();
     setUsername(username);
+    localStorage.setItem('username', username);
     const doesItExists = getDataFromLocalStorage(username);
     if (todoList.length === 0 && doesItExists.length !== 0) {
       setTodoList(doesItExists);
@@ -88,4 +89,4 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
   );
 };
 
-export default Form;
+export default memo(Form);

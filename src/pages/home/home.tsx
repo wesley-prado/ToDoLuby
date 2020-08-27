@@ -11,7 +11,7 @@ const Home: React.FC = () => {
   }
   function handleSubmit(): void {
     username.length > 0
-      ? localStorage.setItem('username', JSON.stringify(username))
+      ? localStorage.setItem('username', username)
       : localStorage.setItem('username', JSON.stringify('Human Being'));
     history.push('/todo');
   }

@@ -14,6 +14,7 @@ export const HomeContainer = styled(Container)`
   left: 50%;
   transform: translate(-50%, -50%);
   height: 70vh;
+  min-height: 500px;
   padding-top: 200px;
   padding-bottom: 200px;
   border-radius: 5px;
