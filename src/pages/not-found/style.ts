@@ -12,6 +12,8 @@ export const NotFoundImg = styled.div`
   background-repeat: no-repeat;
 `;
 export const NotFoundContainer = styled(Container)`
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
