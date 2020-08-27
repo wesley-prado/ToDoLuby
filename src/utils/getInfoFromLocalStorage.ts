@@ -1,8 +1,10 @@
-export function getUsernameFromLocalStorage(){
-  return localStorage.getItem('username')  || 'Human Being'
+import { ToDoTypes } from '../components/form/types';
+
+export function getUsernameFromLocalStorage(): string {
+  return localStorage.getItem('username') || 'Human Being';
 }
 
-export function getDataFromLocalStorage(username: string){
-  const result = JSON.parse(localStorage.getItem(`todo-list#${username}`) || '[]')
-   return result
+export function getDataFromLocalStorage(username: string): ToDoTypes[] {
+  const result = JSON.parse(localStorage.getItem(`todo-list#${username}`) || '[]');
+  return result;
 }

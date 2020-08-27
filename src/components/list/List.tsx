@@ -11,6 +11,7 @@ const List: React.FC<Props> = ({ todo, description, done, complete }) => {
 
   useEffect(() => {
     setIsDone(done);
+    console.log(done);
   }, [done]);
 
   return (
@@ -21,10 +22,9 @@ const List: React.FC<Props> = ({ todo, description, done, complete }) => {
         }}
       >
         {todo}
-        {isDone && '☆'}
       </ListTitle>
       <ListText>{description}</ListText>
-      {isDone ? <p>{done}</p> : <p>{done}</p>}
+      {isDone && 'done'}
     </TodoContainer>
   );
 };
