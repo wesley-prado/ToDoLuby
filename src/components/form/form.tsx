@@ -44,7 +44,7 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
         if(!todoList){
           setTodoList([values])
         }
-        const isValid = todoList.some(el=> el.todo === values.todo)
+        const isValid = todoList.some(el=> el.todo === values.todo && el.description === values.description)
         if(!isValid){
           const newArr = [...todoList, values]
           setTodoList(newArr)
