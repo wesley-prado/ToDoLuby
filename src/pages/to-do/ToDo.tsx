@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Form from '../../components/form/Form'
 import {ListContainer, SortButton} from './style'
-import { Container, Text } from '../../shared/styles'
+import { Container, Subtitle } from '../../shared/styles'
 import List from '../../components/list/List'
 import {ToDoTypes} from '../../components/form/types'
 import { getUsernameFromLocalStorage } from '../../utils/getInfoFromLocalStorage'
@@ -46,7 +46,7 @@ const ToDo: React.FC = () => {
   }
   return (
     <Container>
-      <Text>Write your tasks</Text>
+      <Subtitle>Write your tasks</Subtitle>
       <Form todoList={todoList} setTodoList={setTodoList}/>
       <SortButton onClick={()=>{
         toCompleted ? handleSortIncomplete() : handleSortCompleted()

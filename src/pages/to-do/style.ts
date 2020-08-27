@@ -6,13 +6,15 @@ export const ListContainer = styled.div`
   flex-direction:column;
   align-items:center;
   flex-wrap:nowrap;
-  height:55vh;
+  height:fit-content;
   width: 35vw;
   min-width:400px;
   overflow-y:scroll;
   overflow-x:scroll;
   background-color: #eee;
   border-radius: 5px;
+  height:50vh;
+  min-height:200px;
   padding:15px;
 `
 export const SortButton = styled(Button)`

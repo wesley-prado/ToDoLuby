@@ -16,11 +16,11 @@ const Home: React.FC = ()=>{
   return (
     <HomeContainer>
       <HomeLogo/>
-      <Title>ToDoLuby</Title>
-      <HomeSubtitle>A simple To Do List to organize the tasks you have to accomplish during the day.</HomeSubtitle>
-      <HomeText>Create a profile</HomeText>
-      <Input type="text" onChange={handleChange} autoComplete="on"/>
-      <Button onClick={handleSubmit}>Let's go!</Button>
+        <Title>ToDoLuby</Title>
+        <HomeSubtitle>A simple To Do List to organize the tasks you have to accomplish during the day.</HomeSubtitle>
+        <HomeText>Create a profile</HomeText>
+        <Input type="text" onChange={handleChange} autoComplete="on"/>
+        <Button onClick={handleSubmit}>Let's go!</Button>
     </HomeContainer>
   )
 }

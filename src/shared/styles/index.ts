@@ -17,8 +17,8 @@ export const Container = styled.div`
   align-items:center;
   width:95vw;
   padding: 40px;
-  min-height:100vh;
-  height:100%;
+  height:100vh;
+  overflow:hidden;
   margin:0 auto;
   background-color: #f9f9f9;
   border: 1px solid transparent;
@@ -48,7 +48,7 @@ export const Input = styled.input`
 `
 export const Button = styled.button`
   width:35vw;
-  height:40px;
+  min-height:40px;
   border-radius:5px;
   color: #333;
   font-size: 1em;

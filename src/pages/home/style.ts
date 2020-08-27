@@ -3,6 +3,7 @@ import { Subtitle, Text, Container, Logo } from '../../shared/styles'
 
 export const HomeSubtitle = styled(Subtitle)`
   margin-top: 30px;
+  text-align:center;
 `
 export const HomeText = styled(Text)`
   margin-top: 30px;
@@ -12,7 +13,7 @@ export const HomeContainer = styled(Container)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: fit-content;
+  height:fit-content;
   padding-top: 200px;
   padding-bottom: 200px;
   border-radius: 5px;

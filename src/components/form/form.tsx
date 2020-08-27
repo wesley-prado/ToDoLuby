@@ -44,8 +44,13 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
         if(!todoList){
           setTodoList([values])
         }
-        const newArr = [...todoList, values]
-        setTodoList(newArr)
+        const isValid = todoList.some(el=> el.todo === values.todo)
+        if(!isValid){
+          const newArr = [...todoList, values]
+          setTodoList(newArr)
+          setSubmitting(false)
+        }
+
         setSubmitting(false)
       }}
     >
@@ -54,7 +59,7 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
         errors,
         handleChange,
         handleSubmit,
-        isSubmitting,
+        isSubmitting
       }) => (
         <form onSubmit={handleSubmit}>
           <FormContainer>
@@ -72,7 +77,7 @@ const Form: React.FC<Props> = ({todoList, setTodoList}) => {
               value={values.description}/>
             <FormButton type="submit" disabled={isSubmitting}>Save</FormButton>
             <ErrorContainer>
-              <ErrorText>{ errors.todo || errors.description}</ErrorText>
+              <ErrorText>{ errors.todo || errors.description }</ErrorText>
             </ErrorContainer>
           </FormContainer>
         </form>

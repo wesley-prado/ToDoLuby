@@ -6,12 +6,11 @@ const GlobalStyle = createGlobalStyle`
     padding:0;
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
-    word-break:break-all;
     letter-spacing:0.1em;
   }
   html, body{
-    height:100%;
-    width:100%;
+    height:100vh;
+    width:100vw;
     background-color: skyblue;
   }
 `
