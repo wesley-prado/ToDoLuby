@@ -1,22 +1,22 @@
-import styled from 'styled-components'
-import { Text, Input, Button } from '../../shared/styles'
+import styled from 'styled-components';
+import { Text, Input, Button } from '../../shared/styles';
 
 export const FormContainer = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   min-width: 400px;
-`
+`;
 export const ErrorText = styled(Text)`
-  text-align:center;
+  text-align: center;
   color: crimson;
-  font-weight:bold;
-`
+  font-weight: bold;
+`;
 export const FormInput = styled(Input)`
-  min-width:400px;
-`
+  min-width: 400px;
+`;
 export const FormButton = styled(Button)`
-  min-width:400px;
-`
+  min-width: 400px;
+`;
 export const ErrorContainer = styled.div`
-  height:50px;
-`
+  height: 50px;
+`;
