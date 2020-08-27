@@ -1,7 +1,7 @@
 import { ToDoTypes } from '../components/form/types';
 
 export function getUsernameFromLocalStorage(): string {
-  return JSON.parse(localStorage.getItem('username') || 'Human Being');
+  return localStorage.getItem('username') || 'Human Being';
 }
 
 export function getDataFromLocalStorage(username: string): ToDoTypes[] {

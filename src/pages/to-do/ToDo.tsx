@@ -11,7 +11,9 @@ const ToDo: React.FC = () => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    setUsername(getUsernameFromLocalStorage());
+    if (username.length === 0) {
+      setUsername(JSON.parse(getUsernameFromLocalStorage()));
+    }
   }, [username]);
 
   function complete(i: number): boolean {
