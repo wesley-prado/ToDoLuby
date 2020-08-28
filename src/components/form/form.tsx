@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useEffect } from 'react';
 import { getUsernameFromLocalStorage, getDataFromLocalStorage } from '../../utils/getInfoFromLocalStorage';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +11,6 @@ type Props = {
 };
 
 const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
-  const [username, setUsername] = useState('');
   const todoSchema = Yup.object().shape({
     todo: Yup.string().required().min(5),
     description: Yup.string().required(),
@@ -20,14 +19,13 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
 
   useEffect(() => {
     const username = getUsernameFromLocalStorage();
-    setUsername(username);
     localStorage.setItem('username', username);
     const doesItExists = getDataFromLocalStorage(username);
     if (!todoList.length && doesItExists.length > 0) {
       setTodoList(doesItExists);
     }
     localStorage.setItem(`todo-list#${username}`, JSON.stringify(todoList));
-  }, [setTodoList, todoList, username]);
+  }, [setTodoList, todoList]);
 
   return (
     <Formik
@@ -90,4 +88,4 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
   );
 };
 
-export default memo(Form);
+export default Form;

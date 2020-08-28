@@ -1,13 +1,8 @@
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  Redirect
-} from 'react-router-dom'
-import React from 'react'
-import GlobalStyles from './shared/styles/global-styles'
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import React from 'react';
+import GlobalStyles from './shared/styles/global-styles';
 // Pages
-import { Home, NotFound, ToDo } from './pages'
+import { Home, NotFound, ToDo } from './pages';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +15,7 @@ const App: React.FC = () => {
         <Redirect to="/404" />
       </Switch>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
