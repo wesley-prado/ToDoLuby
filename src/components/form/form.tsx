@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getUsernameFromLocalStorage, getDataFromLocalStorage } from '../../utils/getInfoFromLocalStorage';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -90,4 +90,4 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
   );
 };
 
-export default memo(Form);
+export default Form;
