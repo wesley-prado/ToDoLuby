@@ -20,9 +20,9 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
   useEffect(() => {
     const username = getUsernameFromLocalStorage();
     localStorage.setItem('username', username);
-    const doesItExists = getDataFromLocalStorage(username);
-    if (!todoList.length && doesItExists.length > 0) {
-      setTodoList(doesItExists);
+    const dataFromLocalStorage = getDataFromLocalStorage(username);
+    if (!todoList.length && dataFromLocalStorage.length > 0) {
+      setTodoList(dataFromLocalStorage);
     }
     localStorage.setItem(`todo-list#${username}`, JSON.stringify(todoList));
   }, [setTodoList, todoList]);
@@ -39,9 +39,7 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
         }
         const isInvalid = todoList.some((el) => el.todo === todo && el.description === description);
         if (!isInvalid) {
-          const newArr = [...todoList, { todo, description, done: false }];
-          console.log(newArr);
-          setTodoList(newArr);
+          setTodoList([...todoList, { todo, description, done: false }]);
           setSubmitting(false);
         }
 
