@@ -11,9 +11,8 @@ const ToDo: React.FC = () => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    if (username.length === 0) {
-      const username = getUsernameFromLocalStorage();
-      setUsername(username);
+    if (!username.length) {
+      setUsername(getUsernameFromLocalStorage());
     }
   }, [username]);
 
@@ -30,7 +29,7 @@ const ToDo: React.FC = () => {
       <Subtitle>Write your tasks</Subtitle>
       <Form todoList={todoList} setTodoList={setTodoList} />
       <ListContainer>
-        {todoList.length !== 0 &&
+        {todoList.length > 0 &&
           todoList.map(({ todo, description, done }, i) => {
             return <List todo={todo} description={description} done={done} key={i} complete={() => complete(i)} />;
           })}

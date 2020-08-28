@@ -23,7 +23,7 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
     setUsername(username);
     localStorage.setItem('username', username);
     const doesItExists = getDataFromLocalStorage(username);
-    if (todoList.length === 0 && doesItExists.length !== 0) {
+    if (!todoList.length && doesItExists.length > 0) {
       setTodoList(doesItExists);
     }
     localStorage.setItem(`todo-list#${username}`, JSON.stringify(todoList));
@@ -36,7 +36,7 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
       validateOnBlur={false}
       validateOnChange={false}
       onSubmit={({ todo, description }, { setSubmitting }) => {
-        if (todoList.length === 0) {
+        if (!todoList.length) {
           setTodoList([{ todo, description, done: false }]);
         }
         const isValid = todoList.some((el) => el.todo === todo && el.description === description);
