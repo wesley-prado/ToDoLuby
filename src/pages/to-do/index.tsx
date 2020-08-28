@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Form from '../../components/form/Form';
+import Form from '../../components/form';
 import { ListContainer, ToDoTitle } from './style';
 import { Container, Subtitle } from '../../shared/styles';
-import List from '../../components/list/List';
+import List from '../../components/list';
 import { ToDoTypes } from '../../components/form/types';
 import { getUsernameFromLocalStorage } from '../../utils/getInfoFromLocalStorage';
 
