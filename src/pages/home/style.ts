@@ -7,6 +7,7 @@ export const HomeSubtitle = styled(Subtitle)`
 `;
 export const HomeText = styled(Text)`
   margin-top: 30px;
+  margin-bottom: 15px;
 `;
 export const HomeContainer = styled(Container)`
   position: absolute;
