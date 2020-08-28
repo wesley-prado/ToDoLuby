@@ -13,14 +13,13 @@ const ToDo: React.FC = () => {
   useEffect(() => {
     if (username.length === 0) {
       const username = getUsernameFromLocalStorage();
-      console.log(typeof username);
       setUsername(username);
     }
   }, [username]);
 
   function complete(i: number): boolean {
     const isDone = (todoList[i].done = !todoList[i].done);
-
+    console.log(i);
     localStorage.setItem(`todo-list#${username}`, JSON.stringify(todoList));
     return isDone;
   }

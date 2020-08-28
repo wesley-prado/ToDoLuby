@@ -31,17 +31,18 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
 
   return (
     <Formik
-      initialValues={{ todo: '', description: '', done: false }}
+      initialValues={{ todo: '', description: '' }}
       validationSchema={todoSchema}
       validateOnBlur={false}
       validateOnChange={false}
-      onSubmit={(values, { setSubmitting }) => {
-        if (!todoList) {
-          setTodoList([values]);
+      onSubmit={({ todo, description }, { setSubmitting }) => {
+        if (todoList.length === 0) {
+          setTodoList([{ todo, description, done: false }]);
         }
-        const isValid = todoList.some((el) => el.todo === values.todo && el.description === values.description);
+        const isValid = todoList.some((el) => el.todo === todo && el.description === description);
         if (!isValid) {
-          const newArr = [...todoList, values];
+          const newArr = [...todoList, { todo, description, done: false }];
+          console.log(newArr);
           setTodoList(newArr);
           setSubmitting(false);
         }

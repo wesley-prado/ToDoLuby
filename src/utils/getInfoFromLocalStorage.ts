@@ -6,6 +6,5 @@ export function getUsernameFromLocalStorage(): string {
 
 export function getDataFromLocalStorage(username: string): ToDoTypes[] {
   const result = JSON.parse(localStorage.getItem(`todo-list#${username}`) || '[]');
-  console.log(result);
   return result;
 }
