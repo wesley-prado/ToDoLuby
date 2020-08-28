@@ -37,8 +37,8 @@ const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
         if (!todoList.length) {
           setTodoList([{ todo, description, done: false }]);
         }
-        const isValid = todoList.some((el) => el.todo === todo && el.description === description);
-        if (!isValid) {
+        const isInvalid = todoList.some((el) => el.todo === todo && el.description === description);
+        if (!isInvalid) {
           const newArr = [...todoList, { todo, description, done: false }];
           console.log(newArr);
           setTodoList(newArr);
