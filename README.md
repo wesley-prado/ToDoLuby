@@ -1,3 +1,5 @@
+## This is a simple To Do List to organize the tasks you have to accomplish during the day.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
