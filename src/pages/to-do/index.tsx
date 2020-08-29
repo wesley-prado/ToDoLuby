@@ -17,9 +17,11 @@ const ToDo: React.FC = () => {
   }, [username]);
 
   function complete(i: number): boolean {
-    const isDone = (todoList[i].done = !todoList[i].done);
-    localStorage.setItem(`todo-list#${username}`, JSON.stringify(todoList));
-    return isDone;
+    const tempArr = todoList;
+    const { todo, description, done } = todoList[i];
+    tempArr.splice(i, 1, { todo, description, done: !done });
+    setTodoList([...tempArr]);
+    return done;
   }
 
   return (
