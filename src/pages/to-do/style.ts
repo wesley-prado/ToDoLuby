@@ -20,6 +20,7 @@ export const ListContainer = styled.div`
 export const SortButton = styled(Button)`
   min-width: 400px;
   margin-bottom: 15px;
+  min-width: 400px;
 `;
 export const ToDoTitle = styled(Title)`
   margin-bottom: 30px;
