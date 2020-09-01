@@ -1,2 +1,2 @@
 export { organizeToCompleted, organizeToIncomplete } from './sort';
-export { getUsernameFromLocalStorage, getDataFromLocalStorage } from './getInfoFromLocalStorage';
+export { getUsernameFromLocalStorage, loadState, saveState, saveUsername } from './getInfoFromLocalStorage';

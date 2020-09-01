@@ -1,13 +1,16 @@
 import React, { useState, useEffect, memo } from 'react';
 import { ToDoTypes } from '../form/types';
 import { ListTitle, ListText, TodoContainer } from './style';
+import { toggleDone } from '../../store/actions/toggleDone';
+import { useDispatch } from 'react-redux';
 
 type Props = ToDoTypes & {
-  complete: () => boolean;
+  index: number;
 };
 
-const List: React.FC<Props> = ({ todo, description, done, complete }) => {
+const List: React.FC<Props> = ({ todo, description, done, index }) => {
   const [isDone, setIsDone] = useState(done);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsDone(done);
@@ -17,7 +20,13 @@ const List: React.FC<Props> = ({ todo, description, done, complete }) => {
     <TodoContainer>
       <ListTitle
         onClick={() => {
-          setIsDone(complete());
+          dispatch(
+            toggleDone({
+              todo: { todo, description, done: !done },
+              index,
+            }),
+          );
+          setIsDone(done);
         }}
       >
         {todo}

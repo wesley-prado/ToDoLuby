@@ -1,51 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useCallback, useState, useEffect } from 'react';
 import Form from '../../components/form';
 import { ListContainer, ToDoTitle, SortButton } from './style';
 import { Container, Subtitle } from '../../shared/styles';
+import { getUsernameFromLocalStorage } from '../../utils';
 import List from '../../components/list';
-import { ToDoTypes } from '../../components/form/types';
-import { getUsernameFromLocalStorage, organizeToCompleted, organizeToIncomplete } from '../../utils/';
+import { TodoState } from '../../store/reducers/todoReducer';
+import { useSelector } from 'react-redux';
+import { organizeToIncomplete, organizeToCompleted } from '../../utils';
 
 const ToDo: React.FC = () => {
-  const [todoList, setTodoList] = useState<ToDoTypes[]>([]);
-  const [username, setUsername] = useState('');
+  const [todos, setTodos] = useState<TodoState['todos']>([]);
   const [isCompleted, setIsCompleted] = useState(false);
+  const todosFromContext = useSelector<TodoState, TodoState['todos']>((state) => state.todos);
+
+  const updateTodos = useCallback(() => {
+    setTodos(todosFromContext);
+  }, [todosFromContext]);
 
   useEffect(() => {
-    if (!username.length) {
-      setUsername(getUsernameFromLocalStorage());
-    }
-    setIsCompleted(JSON.parse(localStorage.getItem(`sort#${username}`) || 'false'));
-  }, [username]);
+    updateTodos();
+  }, [updateTodos]);
 
-  function complete(i: number): boolean {
-    const tempArr = todoList;
-    const { todo, description, done } = todoList[i];
-    tempArr.splice(i, 1, { todo, description, done: !done });
-    setTodoList([...tempArr]);
-
-    return done;
-  }
+  const username = useMemo(() => {
+    return getUsernameFromLocalStorage();
+  }, []);
 
   return (
     <Container>
       <ToDoTitle>{username}</ToDoTitle>
       <Subtitle>Write your tasks</Subtitle>
-      <Form todoList={todoList} setTodoList={setTodoList} />
+      <Form />
       <SortButton
         onClick={() => {
-          isCompleted
-            ? organizeToIncomplete(todoList, setTodoList, setIsCompleted)
-            : organizeToCompleted(todoList, setTodoList, setIsCompleted);
-          localStorage.setItem(`sort#${username}`, JSON.stringify(!isCompleted));
+          if (isCompleted) {
+            organizeToIncomplete(todos);
+            setIsCompleted(false);
+          } else {
+            organizeToCompleted(todos);
+            setIsCompleted(true);
+          }
         }}
       >
-        {isCompleted ? 'Sort to Incomplete' : 'Sort to Completed'}
+        {isCompleted ? 'Sort to Completed' : 'Sort to Incomplete'}
       </SortButton>
       <ListContainer>
-        {todoList.length > 0 &&
-          todoList.map(({ todo, description, done }, i) => {
-            return <List todo={todo} description={description} done={done} key={i} complete={() => complete(i)} />;
+        {todos.length > 0 &&
+          todos.map(({ todo, description, done }, i) => {
+            return <List todo={todo} description={description} done={done} key={i} index={i} />;
           })}
       </ListContainer>
     </Container>

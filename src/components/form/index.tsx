@@ -1,48 +1,26 @@
-import React, { useEffect } from 'react';
-import { getUsernameFromLocalStorage, getDataFromLocalStorage } from '../../utils/getInfoFromLocalStorage';
+import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { FormContainer, ErrorText, FormInput, FormButton, ErrorContainer } from './style';
-import { ToDoTypes } from './types';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../../store/actions/addTodo';
 
-type Props = {
-  todoList: ToDoTypes[];
-  setTodoList: React.Dispatch<React.SetStateAction<ToDoTypes[]>>;
-};
-
-const Form: React.FC<Props> = ({ todoList, setTodoList }) => {
+const Form: React.FC = () => {
   const todoSchema = Yup.object().shape({
     todo: Yup.string().required().min(5),
     description: Yup.string().required(),
     done: Yup.bool().default(false),
   });
-
-  useEffect(() => {
-    const username = getUsernameFromLocalStorage();
-    localStorage.setItem('username', username);
-    const dataFromLocalStorage = getDataFromLocalStorage(username);
-    if (!todoList.length && dataFromLocalStorage.length > 0) {
-      setTodoList(dataFromLocalStorage);
-    }
-    localStorage.setItem(`todo-list#${username}`, JSON.stringify(todoList));
-  }, [setTodoList, todoList]);
+  const dispatch = useDispatch();
 
   return (
     <Formik
-      initialValues={{ todo: '', description: '' }}
+      initialValues={{ todo: '', description: '', done: false }}
       validationSchema={todoSchema}
       validateOnBlur={false}
       validateOnChange={false}
-      onSubmit={({ todo, description }, { setSubmitting }) => {
-        if (!todoList.length) {
-          setTodoList([{ todo, description, done: false }]);
-        }
-        const isInvalid = todoList.some((el) => el.todo === todo && el.description === description);
-        if (!isInvalid) {
-          setTodoList([...todoList, { todo, description, done: false }]);
-          setSubmitting(false);
-        }
-
+      onSubmit={({ todo, description, done }, { setSubmitting }) => {
+        dispatch(addTodo(todo, description, done));
         setSubmitting(false);
       }}
     >

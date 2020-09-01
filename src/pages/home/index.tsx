@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../../store/actions/addUser';
+import { saveUsername } from '../../utils';
 import { Input, Button, Title } from '../../shared/styles';
 import { HomeContainer, HomeLogo, HomeSubtitle, HomeText } from './style';
 
 const Home: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('Human Being');
   const history = useHistory();
+  const dispatch = useDispatch();
   function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setUsername(e.target.value);
   }
   function handleSubmit(): void {
-    username.length > 0 ? localStorage.setItem('username', username) : localStorage.setItem('username', 'Human Being');
+    saveUsername(username);
+    dispatch(addUser(username));
     history.push('/todo');
   }
   return (
